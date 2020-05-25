@@ -1,0 +1,16 @@
+.buttons {
+  float: right;
+  display: grid;
+  height: 10px;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+button {
+  background-color: #040814;
+  border: none;
+  color: white;
+}
+
+button:hover {
+  background-color: #55565c;
+}

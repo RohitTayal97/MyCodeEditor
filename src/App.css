@@ -1,0 +1,30 @@
+.App {
+  display: flex;
+  height: 100vh;
+  flex-direction: column;
+  text-align: center;
+  color: grey;
+}
+
+.Head {
+  display: inline-block;
+  height: 20px;
+  padding: 5px;
+  font-size: 12px;
+  background-color: #040814;
+}
+
+.Body {
+  display: flex;
+  flex-grow: 1;
+}
+
+.Explorer {
+  width: 250px;
+  background-color: #000b14;
+}
+
+.CodingWindow {
+  flex-grow: 1;
+  background-color: #030814;
+}
