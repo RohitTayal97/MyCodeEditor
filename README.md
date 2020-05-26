@@ -1,4 +1,4 @@
-## ✨How to Run the Desktop App
+## 🚀How to Run the Desktop App
 
 ```
 - run `npm i`
