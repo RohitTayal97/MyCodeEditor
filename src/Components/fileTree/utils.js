@@ -1,9 +1,18 @@
-const fs = require("fs");
+const Promise = require("bluebird");
 
-export const generateFileTreeObject = (directoryString) => {
-  return fs.readdirAsync(directoryString).then((arrayOfFileNameStrings) => {
-    const fileDataPromises = arrayOfFileNameStrings.map((fileNameString) => {
-      const fullPath = `${directoryString}/${fileNameString}`;
+// turns off forgotten return warning in Bluebird
+Promise.config({
+  warnings: {
+    wForgottenReturn: false,
+  },
+});
+
+const fs = Promise.promisifyAll(window.require("fs"));
+
+export const generateFileTreeObject = (directoryPath) => {
+  return fs.readdirAsync(directoryPath).then((arrayOfFileNames) => {
+    const fileDataPromises = arrayOfFileNames.map((fileName) => {
+      const fullPath = `${directoryPath}/${fileName}`;
       return fs.statAsync(fullPath).then((fileData) => {
         const file = {};
         file.filePath = fullPath;

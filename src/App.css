@@ -20,6 +20,8 @@
 }
 
 .Explorer {
+  display: flex;
+  flex-direction: column;
   width: 250px;
   background-color: #000b14;
 }
