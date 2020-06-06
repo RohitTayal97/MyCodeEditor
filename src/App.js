@@ -9,13 +9,12 @@ const App = () => {
   const [files, setFiles] = useState([]);
   const [folderPath, setFolderPath] = useState("");
 
-  const addFile = (filePath) => {
-    const fileContent = fs.readFileSync(filePath).toString();
-    console.log(fileContent);
-    setFiles(files.concat(fileContent));
+  const addFile = (filePath = "") => {
+    const fileContent = fs.readFileSync(filePath).toString().split("\n");
+    setFiles(fileContent);
   };
 
-  const addFolder = (folderPath) => {
+  const addFolder = (folderPath = "") => {
     setFolderPath(folderPath);
   };
 
@@ -40,7 +39,11 @@ const App = () => {
           />
           <FileTree directoryPath={folderPath} />
         </div>
-        <div className="CodingWindow">Coding Window</div>
+        <div className="CodingWindow">
+          {files.map((fileContent, index) => (
+            <p key={index}>{fileContent}</p>
+          ))}
+        </div>
       </div>
     </div>
   );

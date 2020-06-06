@@ -28,5 +28,7 @@
 
 .CodingWindow {
   flex-grow: 1;
+  text-align: left;
+  padding-left: 20px;
   background-color: #030814;
 }

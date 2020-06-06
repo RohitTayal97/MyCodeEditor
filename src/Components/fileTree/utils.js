@@ -9,7 +9,7 @@ Promise.config({
 
 const fs = Promise.promisifyAll(window.require("fs"));
 
-export const generateFileTreeObject = (directoryPath) => {
+export const generateFileTreeObject = async (directoryPath) => {
   return fs.readdirAsync(directoryPath).then((arrayOfFileNames) => {
     const fileDataPromises = arrayOfFileNames.map((fileName) => {
       const fullPath = `${directoryPath}/${fileName}`;

@@ -11,9 +11,9 @@ const FileTree = (props) => {
       .catch(console.error);
   });
   return (
-    state.length > 0 && (
-      <ul>
-        {state.map((file) => {
+    <ul>
+      {state.length > 0 &&
+        state.map((file) => {
           const filePath = file.filePath;
           const fileName = filePath.split("/").slice(-1).join("");
           return file.isFileBool ? (
@@ -25,8 +25,7 @@ const FileTree = (props) => {
             <li key={filePath}>{`${fileName}`}</li>
           );
         })}
-      </ul>
-    )
+    </ul>
   );
 };
 
