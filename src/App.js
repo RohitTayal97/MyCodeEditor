@@ -1,15 +1,30 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Buttons from "./Components/buttons";
 import InputButton from "./Components/inputButton";
 import FileTree from "./Components/fileTree";
+import { generateFileTreeObject } from "./Components/fileTree/utils";
 import "./App.css";
 const fs = window.require("fs");
 
 const App = () => {
   const [files, setFiles] = useState([]);
   const [folderPath, setFolderPath] = useState("");
+  const [fileObjects, setFileObjects] = useState([]);
+
+  useEffect(() => {
+    folderPath.length > 0 &&
+      generateFileTreeObject(folderPath)
+        .then((fileObjects) => {
+          console.log("@@@@2", fileObjects);
+          setFileObjects(fileObjects);
+        })
+        .catch(console.error);
+  }, [folderPath]);
 
   const addFile = (filePath = "") => {
+    if (filePath === "") {
+      return;
+    }
     const fileContent = fs.readFileSync(filePath).toString().split("\n");
     setFiles(fileContent);
   };
@@ -37,7 +52,7 @@ const App = () => {
             dialogProp="openDirectory"
             add={(folderPath) => addFolder(folderPath)}
           />
-          <FileTree directoryPath={folderPath} />
+          <FileTree fileObjects={fileObjects} />
         </div>
         <div className="CodingWindow">
           {files.map((fileContent, index) => (

@@ -1,30 +1,22 @@
-import React, { useEffect, useState } from "react";
-import { generateFileTreeObject } from "./utils";
+import React from "react";
 
-const FileTree = (props) => {
-  const [state, setState] = useState(props.files || []);
-  useEffect(() => {
-    generateFileTreeObject(props.directoryPath)
-      .then((files) => {
-        setState({ files });
-      })
-      .catch(console.error);
-  });
+const FileTree = ({ fileObjects }) => {
+  console.log("@@@@1", fileObjects);
   return (
     <ul>
-      {state.length > 0 &&
-        state.map((file) => {
-          const filePath = file.filePath;
-          const fileName = filePath.split("/").slice(-1).join("");
-          return file.isFileBool ? (
-            <li key={filePath + " Directory"}>
-              {`${fileName}`}
-              <FileTree directoryPath={file.filePath} files={file.files} />
-            </li>
-          ) : (
-            <li key={filePath}>{`${fileName}`}</li>
-          );
-        })}
+      {fileObjects.map((file) => {
+        const filePath = file.filePath;
+        const fileName = filePath.split("/").slice(-1).join("");
+
+        return !file.isFileBoolean ? (
+          <li key={filePath + " Directory"}>
+            {`${fileName}`}
+            <FileTree files={file.files} />
+          </li>
+        ) : (
+          <li key={filePath}>{`${fileName}`}</li>
+        );
+      })}
     </ul>
   );
 };
