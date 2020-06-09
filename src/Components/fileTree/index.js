@@ -1,17 +1,26 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 const FileTree = ({ fileObjects }) => {
-  console.log("@@@@1", fileObjects);
+  const [fetchedFileObjects, setter] = useState([]);
+  useEffect(() => {
+    let fileInterval = setInterval(function () {
+      if (typeof fileObjects !== "undefined") {
+        setter(fileObjects);
+
+        clearInterval(fileInterval);
+      }
+    }, 20);
+  }, [fileObjects]);
   return (
     <ul>
-      {fileObjects.map((file) => {
+      {fetchedFileObjects.map((file) => {
         const filePath = file.filePath;
         const fileName = filePath.split("/").slice(-1).join("");
 
         return !file.isFileBoolean ? (
           <li key={filePath + " Directory"}>
             {`${fileName}`}
-            <FileTree files={file.files} />
+            <FileTree fileObjects={file.files} />
           </li>
         ) : (
           <li key={filePath}>{`${fileName}`}</li>

@@ -15,7 +15,6 @@ const App = () => {
     folderPath.length > 0 &&
       generateFileTreeObject(folderPath)
         .then((fileObjects) => {
-          console.log("@@@@2", fileObjects);
           setFileObjects(fileObjects);
         })
         .catch(console.error);
@@ -41,7 +40,6 @@ const App = () => {
       </div>
       <div className="Body">
         <div className="Explorer">
-          Explorer
           <InputButton
             label="Open File"
             dialogProp="openFile"
@@ -52,7 +50,12 @@ const App = () => {
             dialogProp="openDirectory"
             add={(folderPath) => addFolder(folderPath)}
           />
-          <FileTree fileObjects={fileObjects} />
+          <ul>
+            {folderPath !== "" && (
+              <li>{folderPath.split("/").slice(-1).join("")}</li>
+            )}
+            <FileTree fileObjects={fileObjects} />
+          </ul>
         </div>
         <div className="CodingWindow">
           {files.map((fileContent, index) => (
