@@ -12,7 +12,7 @@ const InputButton = ({ label, dialogProp, add }) => {
             properties: [dialogProp],
           })
           .then((file) => {
-            if (file) {
+            if (file.filePaths[0]) {
               add(file.filePaths[0]);
             }
           });

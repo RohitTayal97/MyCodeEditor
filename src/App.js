@@ -20,15 +20,12 @@ const App = () => {
         .catch(console.error);
   }, [folderPath]);
 
-  const addFile = (filePath = "") => {
-    if (filePath === "") {
-      return;
-    }
+  const addFile = (filePath) => {
     const fileContent = fs.readFileSync(filePath).toString().split("\n");
     setFiles(fileContent);
   };
 
-  const addFolder = (folderPath = "") => {
+  const addFolder = (folderPath) => {
     setFolderPath(folderPath);
   };
 
@@ -40,6 +37,7 @@ const App = () => {
       </div>
       <div className="Body">
         <div className="Explorer">
+          Explorer
           <InputButton
             label="Open File"
             dialogProp="openFile"
@@ -50,7 +48,7 @@ const App = () => {
             dialogProp="openDirectory"
             add={(folderPath) => addFolder(folderPath)}
           />
-          <ul>
+          <ul className="FileTree">
             {folderPath !== "" && (
               <li>{folderPath.split("/").slice(-1).join("")}</li>
             )}
@@ -59,7 +57,9 @@ const App = () => {
         </div>
         <div className="CodingWindow">
           {files.map((fileContent, index) => (
-            <p key={index}>{fileContent}</p>
+            <pre className="Code" key={index}>
+              {fileContent}
+            </pre>
           ))}
         </div>
       </div>

@@ -6,7 +6,6 @@ const FileTree = ({ fileObjects }) => {
     let fileInterval = setInterval(function () {
       if (typeof fileObjects !== "undefined") {
         setter(fileObjects);
-
         clearInterval(fileInterval);
       }
     }, 20);
